@@ -1,12 +1,11 @@
 import React from 'react';
 import cn from 'classnames';
 
-import './custom.css';
-import s from './App.modules.scss';
+import s from './App.module.scss';
 
 const App = () => {
 	return (
-		<div className={cn(s.header, 'color')}>
+		<div className={cn(s.header)}>
 			Test This is App Componet!
 		</div>
 	)
