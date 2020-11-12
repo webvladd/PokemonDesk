@@ -7,35 +7,6 @@ import s from './Header.module.scss';
 import { ReactComponent as PokemonLogoSvg } from './assets/Logo.svg';
 import { GENERAL_MENU } from '../../routes';
 
-// interface IMenu {
-//   id: number;
-//   value: string;
-//   link: string;
-// }
-//
-// const MENU: IMenu[] = [
-//   {
-//     id: 1,
-//     value: 'Home',
-//     link: '/',
-//   },
-//   {
-//     id: 2,
-//     value: 'Pokédex',
-//     link: '/pokedex',
-//   },
-//   {
-//     id: 3,
-//     value: 'Legendaries',
-//     link: '#',
-//   },
-//   {
-//     id: 4,
-//     value: 'Documentation',
-//     link: '#',
-//   },
-// ];
-
 const Header = () => {
   const path = usePath();
   return (
@@ -63,4 +34,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
