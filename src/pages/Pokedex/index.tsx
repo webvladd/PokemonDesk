@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
+import PokemonCard from '../../components/PokemonCard';
+
 interface PokedexPageProps {
   title?: string;
+}
+
+interface IStats {
+  attack: number;
+  defense: number;
+  hp: number;
+  specialAttack: number;
+  specialDefense: number;
+  speed: number;
 }
 
 interface IPokemon {
@@ -14,7 +25,7 @@ interface IPokemon {
   name: string;
   nameClean: string;
   order: number;
-  stats: string;
+  stats: IStats;
   types: string[];
   weight: number;
 }
@@ -75,9 +86,10 @@ const PokedexPage: React.FC<PokedexPageProps> = ({ title }) => {
   return (
     <>
       <div>{data.total}PokedexPage!!!</div>
+
       <div>
         {data.pokemons.map((item) => (
-          <div>{item.name}</div>
+          <PokemonCard name={item.name} defense={item.stats.defense} attack={item.stats.attack} img={item.img} />
         ))}
       </div>
     </>
