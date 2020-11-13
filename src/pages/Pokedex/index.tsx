@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import PokemonCard from '../../components/PokemonCard';
 
+import s from './Pokedex.module.scss';
+
 interface PokedexPageProps {
   title?: string;
 }
@@ -85,9 +87,9 @@ const PokedexPage: React.FC<PokedexPageProps> = ({ title }) => {
 
   return (
     <>
-      <div>{data.total}PokedexPage!!!</div>
+      <div className={s.title}>{data.total}PokedexPage!!!</div>
 
-      <div>
+      <div className={s.pokemon_cards}>
         {data.pokemons.map((item) => (
           <PokemonCard name={item.name} defense={item.stats.defense} attack={item.stats.attack} img={item.img} />
         ))}
