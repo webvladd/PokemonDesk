@@ -1,10 +1,7 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import PokemonCard from '../../components/PokemonCard';
-
-import s from './Pokedex.module.scss';
 import useData from '../../hook/getData';
-// import req from '../../utils/request';
+import s from './Pokedex.module.scss';
 
 interface PokedexPageProps {
   title?: string;
@@ -76,11 +73,24 @@ interface PokedexPageProps {
 // };
 
 const PokedexPage: React.FC<PokedexPageProps> = ({ title }) => {
-  const { data, isLoading, isError } = useData('getPokemons');
+  const [searchValue, setSearchValue] = useState('');
+  const [query, setQuery] = useState({});
+  // const query = useMemo(() => ({
+  // name: searchValue,
+  // }),[searchValue]);
+  const { data, isLoading, isError } = useData('getPokemons', query, [searchValue]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    setQuery((q) => ({
+      ...q,
+      name: e.target.value,
+    }));
+  };
+
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (isError) {
     return <div>Something wrong!</div>;
@@ -88,12 +98,17 @@ const PokedexPage: React.FC<PokedexPageProps> = ({ title }) => {
 
   return (
     <>
-      <div className={s.title}>{data.total}PokedexPage!!!</div>
+      <div className={s.title}>{!isLoading && data.total}PokedexPage!!!</div>
+
+      <div>
+        <input type="text" value={searchValue} onChange={handleSearchChange} />
+      </div>
 
       <div className={s.pokemon_cards}>
-        {data.pokemons.map((item) => (
-          <PokemonCard name={item.name} defense={item.stats.defense} attack={item.stats.attack} img={item.img} />
-        ))}
+        {!isLoading &&
+          data.pokemons.map((item) => (
+            <PokemonCard name={item.name} defense={item.stats.defense} attack={item.stats.attack} img={item.img} />
+          ))}
       </div>
     </>
   );
