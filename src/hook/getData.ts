@@ -41,7 +41,6 @@ interface IUsePokemons {
   data: IPokemonsData;
   isLoading: boolean;
   isError: boolean;
-  null: null;
 }
 
 const useData = (endpoint: string): IUsePokemons => {
