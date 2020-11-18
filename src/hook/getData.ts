@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
 import req from '../utils/request';
 
-// interface PokedexPageProps {
-// 	title?: string;
-// }
-
 interface IStats {
   attack: number;
   defense: number;
