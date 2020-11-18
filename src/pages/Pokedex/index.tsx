@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PokemonCard from '../../components/PokemonCard';
 
 import s from './Pokedex.module.scss';
-import config from '../../config';
+import req from '../../utils/request';
 
 interface PokedexPageProps {
   title?: string;
@@ -55,11 +55,8 @@ const usePokemons = (): IUsePokemons => {
   useEffect(() => {
     const getPokemons = async () => {
       setIsLoading(true);
-      const url: string = `${config.client.server.protocol}://${config.client.server.host}${config.client.endpoint.getPokemons.uri.pathname}`;
-
       try {
-        const response = await fetch(url);
-        const result = await response.json();
+        const result = await req('getPokemons');
         setData(result);
       } catch (e) {
         setIsError(true);
